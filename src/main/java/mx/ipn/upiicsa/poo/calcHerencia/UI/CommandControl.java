@@ -7,20 +7,24 @@ public class CommandControl {
     public static void modoComando(String[] args) {
         ScientificCalculator calculator = new ScientificCalculator();
 
+        if (args.length == 0) {
+            System.out.println("Error: No se proporcionaron argumentos. Use -help para ver las opciones.");
+            return;
+        }
+        
         // Si no hay argumentos o si el primer argumento es "-help", muestra ayuda
-        if (args.length == 0 || args[0].equals("-help")) {
+        if (args[0].equals("-help")) {
             showHelp();
             return;
-        } else if (args.length < 3) {
-            System.out.println("Error: Se requieren al menos 3 argumentos (operación y número(s)).");
-            showHelp();
+        } else if (args.length < 2) {
+            System.out.println("Error: Se requieren al menos 2 argumentos (operación y número(s)). Use -help para usar el programa de manera adecuada");
             return;
         }
 
         // Obtiene la operación y los valores numéricos de los argumentos
-        String operacion = args[1];
-        double a = Double.parseDouble(args[2]);
-        double b = args.length > 3 ? Double.parseDouble(args[3]) : 0;
+        String operacion = args[0];
+        double a = Double.parseDouble(args[1]);
+        double b = args.length > 3 ? Double.parseDouble(args[2]) : 0;
 
         // Ejecuta la operación correspondiente
         executeOperation(calculator, operacion, a, b);
@@ -91,25 +95,25 @@ public class CommandControl {
     // Muestra la ayuda de los comandos disponibles en modo comando
     public static void showHelp() {
         System.out.println("Uso de la calculadora:");
-        System.out.println("  -p -s -> Suma");
-        System.out.println("  -p -r -> Resta");
-        System.out.println("  -p -m -> Multiplicación");
-        System.out.println("  -p -d -> División");
-        System.out.println("  -p -p -> Porcentaje");
-        System.out.println("  -p -pi -> Piso");
-        System.out.println("  -p -t -> Techo");
-        System.out.println("  -p -re -> Redondeo");
-        System.out.println("  -p -x2 -> Potencia al cuadrado");
-        System.out.println("  -p -x3 -> Potencia al cubo");
-        System.out.println("  -p -xn -> Potencia a la n (se requiere un segundo número)");
-        System.out.println("  -p -x_2 -> Raíz cuadrada");
-        System.out.println("  -p -x_3 -> Raíz cúbica");
-        System.out.println("  -p -x_n -> Raíz n (se requiere un segundo número)");
-        System.out.println("  -p -sin -> Seno");
-        System.out.println("  -p -cos -> Coseno");
-        System.out.println("  -p -tan -> Tangente");
-        System.out.println("  -p -fact -> Factorial");
-        System.out.println("Ejemplo: -p -re 2.56789");
+        System.out.println(" -s -> Suma");
+        System.out.println(" -r -> Resta");
+        System.out.println(" -m -> Multiplicación");
+        System.out.println(" -d -> División");
+        System.out.println(" -p -> Porcentaje");
+        System.out.println(" -pi -> Piso");
+        System.out.println(" -t -> Techo");
+        System.out.println(" -re -> Redondeo");
+        System.out.println(" -x2 -> Potencia al cuadrado");
+        System.out.println(" -x3 -> Potencia al cubo");
+        System.out.println(" -xn -> Potencia a la n (se requiere un segundo número)");
+        System.out.println(" -x_2 -> Raíz cuadrada");
+        System.out.println(" -x_3 -> Raíz cúbica");
+        System.out.println(" -x_n -> Raíz n (se requiere un segundo número)");
+        System.out.println(" -sin -> Seno");
+        System.out.println(" -cos -> Coseno");
+        System.out.println(" -tan -> Tangente");
+        System.out.println(" -fact -> Factorial");
+        System.out.println("Ejemplo: -re 2.56789");
         System.out.println("Salida: Resultado del redondeo: 3.0");
     }
 }

@@ -12,21 +12,29 @@ public class App {
                 System.out.println("Seleccione modo de uso:");
                 System.out.println("-m -> menú");
                 System.out.println("-p -> uso de argumentos");
-
+    
                 String modo = scanner.next();
-
+    
+                // Limpia el salto de línea pendiente
+                scanner.nextLine();
+    
                 // Ejecuta la calculadora en modo menú
                 if (modo.equals("-m")) {
                     new Menu().mostrarMenu();
-                // Ejecuta la calculadora en modo de argumentos
+                // Ejecuta la calculadora en modo de argumentos y pide los argumentos necesarios
                 } else if (modo.equals("-p")) {
-                    CommandControl.modoComando(args);
+                    System.out.println("Ingrese la operación y los números separados por espacios (Ejemplo: -re 9.9):");
+                    String input = scanner.nextLine().trim();
+    
+                    // Convierte la entrada en un arreglo de argumentos y llama a modoComando
+                    String[] userArgs = input.split("\\s+");
+                    CommandControl.modoComando(userArgs);
                 } else {
                     System.out.println("Opción no válida.");
                 }
             }
         } else {
-            // Si hay argumentos, se ejecuta en modo comando
+            // Si hay argumentos, se ejecuta en modo comando directamente
             CommandControl.modoComando(args);
         }
     }
