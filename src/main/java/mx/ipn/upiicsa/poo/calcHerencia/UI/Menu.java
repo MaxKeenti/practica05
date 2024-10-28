@@ -4,7 +4,6 @@ import mx.ipn.upiicsa.poo.calcHerencia.Calculator.*;
 import java.util.Scanner;
 
 public class Menu {
-
     private ScientificCalculator calculator;
     private Scanner scanner;
 
@@ -13,8 +12,10 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
+    // Muestra el menú de opciones y procesa la selección de operación del usuario
     public void mostrarMenu() {
         while (true) {
+            // Cada opción realiza una operación matemática con base en la selección del usuario
             System.out.println("Seleccione una operación a realizar o escriba 'exit' para salir:");
             System.out.println("s - Suma");
             System.out.println("r - Resta");
@@ -58,9 +59,10 @@ public class Menu {
             ejecutarOperacion(operacion, a, b);
         }
         
-        scanner.close();  // Cierra el Scanner al salir del bucle
+        scanner.close();
     }
 
+    // Verifica si la operación ingresada es válida
     private boolean operacionValida(String operacion) {
         return operacion.equals("s") || operacion.equals("r") || operacion.equals("m") || 
                operacion.equals("d") || operacion.equals("p") || operacion.equals("pi") || 
@@ -70,10 +72,12 @@ public class Menu {
                operacion.equals("cos") || operacion.equals("tan") || operacion.equals("fact");
     }
 
+    // Determina si se requiere un segundo número para la operación
     private boolean requiereSegundoNumero(String operacion) {
         return !operacion.equals("pi") && !operacion.equals("t") && !operacion.equals("re");
     }
 
+    // Ejecuta la operación seleccionada por el usuario
     private void ejecutarOperacion(String operacion, double a, double b) {
         switch (operacion) {
             case "s":

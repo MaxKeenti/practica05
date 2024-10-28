@@ -3,10 +3,11 @@ package mx.ipn.upiicsa.poo.calcHerencia.UI;
 import mx.ipn.upiicsa.poo.calcHerencia.Calculator.*;
 
 public class CommandControl {
-
+    // Ejecuta el modo comando en base a los argumentos dados
     public static void modoComando(String[] args) {
         ScientificCalculator calculator = new ScientificCalculator();
 
+        // Si no hay argumentos o si el primer argumento es "-help", muestra ayuda
         if (args.length == 0 || args[0].equals("-help")) {
             showHelp();
             return;
@@ -16,13 +17,16 @@ public class CommandControl {
             return;
         }
 
+        // Obtiene la operación y los valores numéricos de los argumentos
         String operacion = args[1];
         double a = Double.parseDouble(args[2]);
         double b = args.length > 3 ? Double.parseDouble(args[3]) : 0;
 
+        // Ejecuta la operación correspondiente
         executeOperation(calculator, operacion, a, b);
     }
 
+    // Ejecuta la operación seleccionada e imprime el resultado
     private static void executeOperation(ScientificCalculator calculator, String operacion, double a, double b) {
         switch (operacion) {
             case "-s":
@@ -84,6 +88,7 @@ public class CommandControl {
         }
     }
 
+    // Muestra la ayuda de los comandos disponibles en modo comando
     public static void showHelp() {
         System.out.println("Uso de la calculadora:");
         System.out.println("  -p -s -> Suma");

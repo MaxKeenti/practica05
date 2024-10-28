@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        // Verifica si hay argumentos, si no, permite al usuario elegir un modo de operación
         if (args.length == 0) {
             try (Scanner scanner = new Scanner(System.in)) {
                 System.out.println("Seleccione modo de uso:");
@@ -14,16 +15,18 @@ public class App {
 
                 String modo = scanner.next();
 
+                // Ejecuta la calculadora en modo menú
                 if (modo.equals("-m")) {
-                    new Menu().mostrarMenu();  // El Scanner se cerrará dentro de Menu
+                    new Menu().mostrarMenu();
+                // Ejecuta la calculadora en modo de argumentos
                 } else if (modo.equals("-p")) {
-                    CommandControl.modoComando(args); // Enviará a -help para mostrar las opciones
+                    CommandControl.modoComando(args);
                 } else {
                     System.out.println("Opción no válida.");
                 }
             }
         } else {
-            // Si hay argumentos, se procede con el modo de comando directamente.
+            // Si hay argumentos, se ejecuta en modo comando
             CommandControl.modoComando(args);
         }
     }
