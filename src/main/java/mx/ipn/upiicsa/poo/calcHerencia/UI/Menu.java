@@ -4,7 +4,7 @@ import mx.ipn.upiicsa.poo.calcHerencia.Calculator.*;
 import java.util.Scanner;
 
 public class Menu {
-    
+
     private ScientificCalculator calculator;
     private Scanner scanner;
 
@@ -14,47 +14,65 @@ public class Menu {
     }
 
     public void mostrarMenu() {
-        System.out.println("Seleccione una operación a realizar:");
-        System.out.println("Calculadora básica:");
-        System.out.println("s - Suma");
-        System.out.println("r - Resta");
-        System.out.println("m - Multiplicación");
-        System.out.println("d - División");
-        System.out.println("p - Porcentaje");
-        System.out.println("Calculadora científica:");
-        System.out.println("pi - Piso");
-        System.out.println("t - Techo");
-        System.out.println("re - Redondeo");
-        System.out.println("x2 - Potencia al cuadrado");
-        System.out.println("x3 - Potencia al cubo");
-        System.out.println("xn - Potencia a la n");
-        System.out.println("x_2 - Raíz cuadrada");
-        System.out.println("x_3 - Raíz cúbica");
-        System.out.println("x_n - Raíz n");
-        System.out.println("sin - Seno");
-        System.out.println("cos - Coseno");
-        System.out.println("tan - Tangente");
-        System.out.println("fact - Factorial");
+        while (true) {
+            System.out.println("Seleccione una operación a realizar o escriba 'exit' para salir:");
+            System.out.println("s - Suma");
+            System.out.println("r - Resta");
+            System.out.println("m - Multiplicación");
+            System.out.println("d - División");
+            System.out.println("p - Porcentaje");
+            System.out.println("pi - Piso");
+            System.out.println("t - Techo");
+            System.out.println("re - Redondeo");
+            System.out.println("x2 - Potencia al cuadrado");
+            System.out.println("x3 - Potencia al cubo");
+            System.out.println("xn - Potencia a la n");
+            System.out.println("x_2 - Raíz cuadrada");
+            System.out.println("x_3 - Raíz cúbica");
+            System.out.println("x_n - Raíz n");
+            System.out.println("sin - Seno");
+            System.out.println("cos - Coseno");
+            System.out.println("tan - Tangente");
+            System.out.println("fact - Factorial");
 
-        String operacion = scanner.next();
-        double a, b = 0;
+            String operacion = scanner.next();
+            if (operacion.equals("exit")) {
+                System.out.println("Saliendo de la calculadora...");
+                break;
+            }
 
-        System.out.print("Ingrese el primer número: ");
-        a = scanner.nextDouble();
+            if (!operacionValida(operacion)) {
+                System.out.println("Operación no válida. Intente nuevamente.");
+                continue;
+            }
 
-        // Determinamos si se necesita un segundo número para la operación
-        if (operacion.equals("xn") || operacion.equals("x_n")) {
-            System.out.print("Ingrese el segundo número: ");
-            b = scanner.nextDouble();
-        } else if (!operacion.equals("pi") && !operacion.equals("t") && !operacion.equals("re") 
-                   && !operacion.equals("x2") && !operacion.equals("x3") 
-                   && !operacion.equals("x_2") && !operacion.equals("x_3") 
-                   && !operacion.equals("sin") && !operacion.equals("cos") 
-                   && !operacion.equals("tan") && !operacion.equals("fact")) {
-            System.out.print("Ingrese el segundo número: ");
-            b = scanner.nextDouble();
+            System.out.print("Ingrese el primer número: ");
+            double a = scanner.nextDouble();
+
+            double b = 0;
+            if (requiereSegundoNumero(operacion)) {
+                System.out.print("Ingrese el segundo número: ");
+                b = scanner.nextDouble();
+            }
+
+            ejecutarOperacion(operacion, a, b);
         }
+    }
 
+    private boolean operacionValida(String operacion) {
+        return operacion.equals("s") || operacion.equals("r") || operacion.equals("m") ||
+               operacion.equals("d") || operacion.equals("p") || operacion.equals("pi") ||
+               operacion.equals("t") || operacion.equals("re") || operacion.equals("x2") ||
+               operacion.equals("x3") || operacion.equals("xn") || operacion.equals("x_2") ||
+               operacion.equals("x_3") || operacion.equals("x_n") || operacion.equals("sin") ||
+               operacion.equals("cos") || operacion.equals("tan") || operacion.equals("fact");
+    }
+
+    private boolean requiereSegundoNumero(String operacion) {
+        return !operacion.equals("pi") && !operacion.equals("t") && !operacion.equals("re");
+    }
+
+    private void ejecutarOperacion(String operacion, double a, double b) {
         switch (operacion) {
             case "s":
                 System.out.println("Resultado: " + calculator.suma(a, b));
@@ -114,6 +132,5 @@ public class Menu {
                 System.out.println("Operación no válida.");
                 break;
         }
-        scanner.close();
     }
 }

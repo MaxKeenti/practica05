@@ -3,25 +3,16 @@ package mx.ipn.upiicsa.poo.calcHerencia.UI;
 import mx.ipn.upiicsa.poo.calcHerencia.Calculator.*;
 
 public class CommandControl {
-    // Método para gestionar el modo de línea de comandos
+
     public static void modoComando(String[] args) {
         ScientificCalculator calculator = new ScientificCalculator();
 
-        if (args.length == 0) {
-            System.out.println("Debe proporcionar un comando. Use -help para ver las opciones.");
-            return;
-        }
-
-        // Interpretamos la opción
-        String opcion = args[0];
-
-        if (opcion.equals("-help")) {
+        if (args.length == 0 || args[0].equals("-help")) {
             showHelp();
             return;
-        } 
-        
-        if (args.length < 3) {
-            System.out.println("Error: Se requieren al menos 3 argumentos (opción, operación y un número).");
+        } else if (args.length < 3) {
+            System.out.println("Error: Se requieren al menos 3 argumentos (operación y número(s)).");
+            showHelp();
             return;
         }
 
@@ -29,20 +20,10 @@ public class CommandControl {
         double a = Double.parseDouble(args[2]);
         double b = args.length > 3 ? Double.parseDouble(args[3]) : 0;
 
-        switch (opcion) {
-            case "-p":
-                excecuteBasicOperation(calculator, operacion, a, b);
-                break;
-            case "-m":
-                excecuteScientificOperation(calculator, operacion, a, b);
-                break;
-            default:
-                System.out.println("Comando no reconocido. Use -help para ver las opciones.");
-        }
+        executeOperation(calculator, operacion, a, b);
     }
 
-    public static void excecuteBasicOperation(ScientificCalculator calculator, String operacion, double a, double b) {
-        // Ejecutamos la operación correspondiente
+    private static void executeOperation(ScientificCalculator calculator, String operacion, double a, double b) {
         switch (operacion) {
             case "-s":
                 System.out.println("Resultado de la suma: " + calculator.suma(a, b));
@@ -59,15 +40,7 @@ public class CommandControl {
             case "-p":
                 System.out.println("Resultado del porcentaje: " + calculator.porcentaje(a, b));
                 break;
-            default:
-                System.out.println("Comando no reconocido. Use -help para ver las opciones.");
-        }
-    }
-
-    public static void excecuteScientificOperation(ScientificCalculator calculator, String operacion, double a, double b) {
-        // Ejecutamos la operación correspondiente
-        switch (operacion) {
-            case "-pi":
+                case "-pi":
                 System.out.println("Resultado del piso: " + calculator.piso(a));
                 break;
             case "-t":
@@ -107,37 +80,31 @@ public class CommandControl {
                 System.out.println("Resultado del factorial: " + calculator.factorial((int) a));
                 break;
             default:
-                System.out.println("Comando no reconocido. Use -help para ver las opciones.");
+                System.out.println("Operación no reconocida. Use -help para ver las opciones.");
         }
     }
 
     public static void showHelp() {
-        System.out.println("Uso:");
-        System.out.println("  -p -> Para operaciones básicas");
-        System.out.println("  -m -> Para operaciones científicas");
-        System.out.println("Modo -p:");
+        System.out.println("Uso de la calculadora:");
         System.out.println("  -p -s -> Suma");
         System.out.println("  -p -r -> Resta");
         System.out.println("  -p -m -> Multiplicación");
         System.out.println("  -p -d -> División");
         System.out.println("  -p -p -> Porcentaje");
-        System.out.println("Ejemplo: -p -s 2 4");
-        System.out.println("Salida: Resultado de la suma: 6");
-        System.out.println("Modo -m:");
-        System.out.println("  -m -pi -> Piso");
-        System.out.println("  -m -t -> Techo");
-        System.out.println("  -m -re -> Redondeo");
-        System.out.println("  -m -x2 -> Potencia al cuadrado");
-        System.out.println("  -m -x3 -> Potencia al cubo");
-        System.out.println("  -m -xn -> Potencia a la n (se requiere un segundo número)");
-        System.out.println("  -m -x_2 -> Raíz cuadrada");
-        System.out.println("  -m -x_3 -> Raíz cúbica");
-        System.out.println("  -m -x_n -> Raíz n (se requiere un segundo número)");
-        System.out.println("  -m -sin -> Seno");
-        System.out.println("  -m -cos -> Coseno");
-        System.out.println("  -m -tan -> Tangente");
-        System.out.println("  -m -fact -> Factorial");
-        System.out.println("Ejemplo: -m -re 2.56789");
+        System.out.println("  -p -pi -> Piso");
+        System.out.println("  -p -t -> Techo");
+        System.out.println("  -p -re -> Redondeo");
+        System.out.println("  -p -x2 -> Potencia al cuadrado");
+        System.out.println("  -p -x3 -> Potencia al cubo");
+        System.out.println("  -p -xn -> Potencia a la n (se requiere un segundo número)");
+        System.out.println("  -p -x_2 -> Raíz cuadrada");
+        System.out.println("  -p -x_3 -> Raíz cúbica");
+        System.out.println("  -p -x_n -> Raíz n (se requiere un segundo número)");
+        System.out.println("  -p -sin -> Seno");
+        System.out.println("  -p -cos -> Coseno");
+        System.out.println("  -p -tan -> Tangente");
+        System.out.println("  -p -fact -> Factorial");
+        System.out.println("Ejemplo: -p -re 2.56789");
         System.out.println("Salida: Resultado del redondeo: 3.0");
     }
 }
