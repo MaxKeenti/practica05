@@ -57,11 +57,13 @@ public class Menu {
 
             ejecutarOperacion(operacion, a, b);
         }
+        
+        scanner.close();  // Cierra el Scanner al salir del bucle
     }
 
     private boolean operacionValida(String operacion) {
-        return operacion.equals("s") || operacion.equals("r") || operacion.equals("m") ||
-               operacion.equals("d") || operacion.equals("p") || operacion.equals("pi") ||
+        return operacion.equals("s") || operacion.equals("r") || operacion.equals("m") || 
+               operacion.equals("d") || operacion.equals("p") || operacion.equals("pi") || 
                operacion.equals("t") || operacion.equals("re") || operacion.equals("x2") ||
                operacion.equals("x3") || operacion.equals("xn") || operacion.equals("x_2") ||
                operacion.equals("x_3") || operacion.equals("x_n") || operacion.equals("sin") ||
